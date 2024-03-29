@@ -1,0 +1,5 @@
+{
+  "@root": ".",
+  "@client": "./src/client",
+  "@server": "./src/server"
+}

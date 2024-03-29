@@ -1,0 +1,53 @@
+{
+  "name": "@mediastream/platform-assistant-v2",
+  "version": "1.0.0",
+  "description": "Assistant for Mediastream Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "platform start",
+    "deploy": "platform deploy",
+    "start:server": "platform start --only server",
+    "deploy:server": "platform deploy --only server",
+    "lint": "eslint . --ext .jsx --ext .js",
+    "start:client": "platform start --only client",
+    "deploy:client": "platform deploy --only client"
+  },
+  "author": "Mediastream",
+  "license": "MIT",
+  "dependencies": {
+    "@mediastream/platform-microservice-sdk": "^1.2.10"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.24.1",
+    "autoprefixer": "^10.4.19",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "clean-webpack-plugin": "^4.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^24.7.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-react": "^7.28.0",
+    "mini-css-extract-plugin": "^2.8.1",
+    "module-alias": "^2.2.3",
+    "postcss": "^8.4.38",
+    "postcss-combine-duplicated-selectors": "^10.0.3",
+    "postcss-loader": "^6.2.1",
+    "postcss-remove-root": "^0.0.2",
+    "serverless": "^2.72.4",
+    "serverless-api-compression": "^1.0.1",
+    "serverless-apigw-binary": "^0.4.4",
+    "serverless-bundle": "^5.5.0",
+    "serverless-domain-manager": "^5.8.0",
+    "serverless-offline": "^8.8.1",
+    "serverless-plugin-log-retention": "^2.0.0",
+    "serverless-plugin-resource-tagging": "^1.2.0",
+    "style-loader": "^3.3.4",
+    "terser-webpack-plugin": "^5.3.10",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.15.2"
+  }
+}

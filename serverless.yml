@@ -1,0 +1,56 @@
+package:
+  excludeDevDependencies: true
+  individually: true
+  patterns:
+    - '!node_modules/**'
+
+service: ${self:custom.PROJECT_NAME}
+variablesResolutionMode: 20210326
+frameworkVersion: ^2.10.0
+
+custom: ${file(./sls_config_loader.js):config}
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+  iam:
+    role: arn:aws:iam::934583553888:role/vms-base-role
+  stage: ${self:custom.stage}
+  timeout: 25
+  memorySize: 128
+  lambdaHashingVersion: 20201221
+  environment:
+    NODE_ENV: production
+    CUSTOM_ENV: ${self:custom.ENV}
+    MICROSERVICE_HOST: ${self:custom.MICROSERVICE_HOST}
+    DATABASE_PROXY_URL: ${self:custom.DATABASE_PROXY_URL}
+    PLATFORM_CONFIG: ${self:custom.PLATFORM_CONFIG}
+  apiGateway:
+    shouldStartNameWithService: true
+  stackTags: ${self:custom.tags}
+
+functions:
+    api: ${self:custom.apiHandler}
+
+resources:
+    Resources:
+        GatewayResponseDefault4XX:
+            Type: 'AWS::ApiGateway::GatewayResponse'
+            Properties:
+                ResponseParameters:
+                    gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+                    gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+                ResponseType: DEFAULT_4XX
+                RestApiId:
+                    Ref: 'ApiGatewayRestApi'
+
+plugins:
+  - serverless-bundle
+  - '@mediastream/platform-microservice-sdk/sls'
+  - serverless-api-compression
+  - serverless-offline
+  - serverless-domain-manager
+  - serverless-apigw-binary
+  - serverless-plugin-resource-tagging
+  - serverless-plugin-log-retention
